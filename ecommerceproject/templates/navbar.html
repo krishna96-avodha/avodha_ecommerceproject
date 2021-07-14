@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">WELCOME!</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'ecommerceapp:allProdCat' %}">Home <span class="sr-only"></span></a>
+
+      </li>
+
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Shop
+        </a>
+        <l class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{% url 'ecommerceapp:allProdCat' %}">All product</a>
+         {% for l in links %}
+          <a class="dropdown-item" href="{{l.get_url}}">{{l.name}}</a>
+          {% endfor %}
+      </l>
+      {% if item_count > 0 %}
+      <li class="nav-item">
+        <a class="nav-link" href="cart:cart_details"><i class="fas fa-cart-plus">{{item_count}}</i></a>
+      </li>
+      {% endif %}
+      {% if user.is_authenticated %}
+      <li>Hii {{user.username}}</li>
+      <li><a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a></li>
+      {% else %}
+      <li><a class='nav-link' href="{% url 'accounts:register' %}">Registration</a></li>
+      <li><a class='nav-link' href="{% url 'accounts:login' %}">LOGIN</a></li>
+      {% endif %}
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="{% url 'search_app:searchResult' %}" method="get">
+
+
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" name="q">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
+    </form>
+  </div>
+</nav>
+
+<!--<nav>-->
+<!--    <ul>-->
+<!--        <li><a href="{% url 'ecommerceapp:allProdCat' %}">All Product</a> </li>-->
+<!--        {% for cat in links %}-->
+<!--            <li><a href="{{cat.get_url}}">{{cat.name}}</a> </li>-->
+<!--        {% endfor %}-->
+<!--        <li>your cart</li>-->
+
+<!--    </ul>-->
+<!--</nav>-->
